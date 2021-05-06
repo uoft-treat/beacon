@@ -25,7 +25,9 @@ jobs:
           cd services/data-collection
           npm ci
       - name: Build data collection service
-        run: npm run build
+        run: |
+          cd services/data-collection
+          npm run build
 
   test_data_collection_service:
     runs-on: ubuntu-latest
@@ -33,4 +35,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run tests
-        run: npm run test
+        run: |
+          cd services/data-collection
+          npm run test
