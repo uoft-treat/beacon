@@ -42,6 +42,20 @@ jobs:
           cd services/experiment-registry
           npm run build
 
+  build_survey_questions_service:
+    runs-on: ubuntu-latest
+    needs: install_global_dependencies
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install NPM packages
+        run: |
+          cd services/survey-questions
+          npm ci
+      - name: Build survey questions service
+        run: |
+          cd services/survey-questions
+          npm run build
+
   build_widget_registry_service:
     runs-on: ubuntu-latest
     needs: install_global_dependencies
