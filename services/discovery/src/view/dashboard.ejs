@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+    <title>TREAT Discovery Service</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">TREAT Discovery Service</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <hr class="mt-3"/>
+            <h3>Services</h3>
+            <p><small>List of services available in this node.</small></p>
+
+            <% for(let api of apis){ %>
+
+                <h4><%= api.name %></h4>
+
+                <form action="dashboard/removeApi" method="post" style="display: inline;">
+                    <input type="hidden" value="<%= api.name %>" name="name"/>
+                    <button class="btn btn-danger btn-sm">Delete Service</button>
+                </form>
+
+                <br/><br/>
+
+                <ul>
+                    <% for(let endpoint of api.endpoints){ %>
+                        <li>
+                            <code><%= endpoint %></code>
+                            <form action="dashboard/removeEndpoint" method="post" style="display: inline;">
+                                <input type="hidden" value="<%= api.name %>" name="name"/>
+                                <input type="hidden" value="<%= endpoint %>" name="endpoint"/>
+                                <button class="btn btn-outline-danger btn-sm">Delete</button>
+                            </form>
+                        </li>
+                    <% } %>
+                </ul>
+
+                <form action="dashboard/addEndpoint" method="post">
+                    <input type="hidden" value="<%= api.name %>" name="name"/>
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="http://" name="endpoint"/>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary">Add Endpoint</button>
+                        </div>
+                    </div>
+                </form>
+
+                <br/>
+
+            <% } %>
+
+            <hr class="mt-3"/>
+            <h3>New Service</h3>
+            <p><small>Create a new service.</small></p>
+
+            <form action="dashboard/addApi" method="post">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="my service" name="name"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary">Add Service</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <hr class="mt-3"/>
+        <pre><%= JSON.stringify(apis, 2, 2, null) %></pre>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
