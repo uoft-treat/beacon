@@ -1,0 +1,36 @@
+name: Build / Test and Deploy for Dev
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  install_global_dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+  build_data_collection_service:
+    runs-on: ubuntu-latest
+    needs: install_global_dependencies
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install NPM packages
+        run: |
+          cd services/data-collection
+          npm ci
+      - name: Build data collection service
+        run: npm run build
+
+  test_data_collection_service:
+    runs-on: ubuntu-latest
+    needs: install_global_dependencies
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tests
+        run: npm run test
