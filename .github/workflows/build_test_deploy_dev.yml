@@ -5,7 +5,6 @@ on:
     branches:
       - main
 
-
 jobs:
   install_global_dependencies:
     runs-on: ubuntu-latest
@@ -27,4 +26,18 @@ jobs:
       - name: Build data collection service
         run: |
           cd services/data-collection
+          npm run build
+
+  build_experiment_registry_service:
+    runs-on: ubuntu-latest
+    needs: install_global_dependencies
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install NPM packages
+        run: |
+          cd services/experiment-registry
+          npm ci
+      - name: Build experiment registry service
+        run: |
+          cd services/experiment-registry
           npm run build
