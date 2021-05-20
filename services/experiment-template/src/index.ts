@@ -18,10 +18,6 @@ app.use(bodyParser.json());
 
 // Initialize discovery service
 const discoveryService = new DiscoveryServiceImpl(process.env.DISCOVERY_SERVICE_URL);
-discoveryService.validate().catch(() => {
-    console.log("Discovery service validation failure.");
-    process.exit()
-});
 
 const experimentTemplateService = new ExperimentTemplateServiceImpl();
 

@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
+var inversify_1 = require("inversify");
+var RestServer_1 = require("./web/RestServer");
+var ExperimentController_1 = require("./controller/ExperimentController");
+var ExperimentServiceImpl_1 = require("./service/impl/ExperimentServiceImpl");
+var container = new inversify_1.Container();
+container.bind('ExperimentService').to(ExperimentServiceImpl_1.ExperimentServiceImpl);
+container.bind('ExperimentController').to(ExperimentController_1.ExperimentController);
+container.bind('RestServer').to(RestServer_1.RestServer);
+exports.default = container;

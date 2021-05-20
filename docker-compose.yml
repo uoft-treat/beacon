@@ -1,14 +1,101 @@
 version: "3.9"
 services:
-  csv_generation:
-    build: ./services/csv-generation
-    ports:
-      - "3050:3050"
-    volumes:
-      - ./services/csv-generation:/app
-    environment:
-      - PORT=3050
-      - MONGODB_URL=mongodb://db:27017/csv-generation
-    command: ./start.sh
-  db:
-    image: mongo
+    csv_generation:
+        build: ./services/csv-generation
+        image: treat/csv-generation
+        ports:
+            - "3050:3050"
+        volumes:
+            - ./services/csv-generation:/app
+        environment:
+            - PORT=3050
+            - MONGODB_URL=mongodb://db:27017/csv-generation
+        command: ./start.sh
+    data_collection:
+        build: ./services/data-collection
+        image: treat/data-collection
+        ports:
+            - "3051:3051"
+        volumes:
+            - ./services/data-collection:/app
+        environment:
+            - PORT=3051
+            - MONGODB_URL=mongodb://db:27017/data-collection
+        command: ./start.sh
+    discovery:
+        build: ./services/discovery
+        image: treat/discovery
+        ports:
+            - "3052:3052"
+        volumes:
+            - ./services/discovery:/app
+        environment:
+            - PORT=3052
+            - MONGODB_URL=mongodb://db:27017/discovery
+        command: ./start.sh
+    experiment_registry:
+        build: ./services/experiment-registry
+        image: treat/experiment-registry
+        ports:
+            - "3053:3053"
+        volumes:
+            - ./services/experiment-registry:/app
+        environment:
+            - PORT=3053
+            - MONGODB_URL=mongodb://db:27017/experiment-registry
+        command: ./start.sh
+    experiment_session:
+        build: ./services/experiment-session
+        ports:
+            - "3054:3054"
+        volumes:
+            - ./services/experiment-session:/app
+        environment:
+            - PORT=3054
+            - MONGODB_URL=mongodb://db:27017/experiment-session
+            - DISCOVERY_SERVICE_URL=http://discovery:3052
+        command: ./start.sh
+    experiment_template:
+        build: ./services/experiment-template
+        ports:
+            - "3055:3055"
+        volumes:
+            - ./services/experiment-template:/app
+        environment:
+            - PORT=3055
+            - MONGODB_URL=mongodb://db:27017/experiment-template
+            - DISCOVERY_SERVICE_URL=http://discovery:3052
+        command: ./start.sh
+    survey_questions:
+        build: ./services/survey-questions
+        ports:
+            - "3056:3056"
+        volumes:
+            - ./services/survey-questions:/app
+        environment:
+            - PORT=3056
+            - MONGODB_URL=mongodb://db:27017/survey-questions
+        command: ./start.sh
+    survey_template:
+        build: ./services/survey-template
+        ports:
+            - "3057:3057"
+        volumes:
+            - ./services/survey-template:/app
+        environment:
+            - PORT=3057
+            - MONGODB_URL=mongodb://db:27017/survey-template
+            - DISCOVERY_SERVICE_URL=http://discovery:3052
+        command: ./start.sh
+    widget_registry:
+        build: ./services/widget-registry
+        ports:
+            - "3058:3058"
+        volumes:
+            - ./services/widget-registry:/app
+        environment:
+            - PORT=3058
+            - MONGODB_URL=mongodb://db:27017/widget-registry
+        command: ./start.sh
+    db:
+        image: mongo
