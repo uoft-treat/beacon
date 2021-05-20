@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  csv_generation:
+    build: ./services/csv-generation
+    ports:
+      - "3050:3050"
+    volumes:
+      - ./services/csv-generation:/app
+    environment:
+      - PORT=3050
+      - MONGODB_URL=mongodb://db:27017/csv-generation
+    command: ./start.sh
+  db:
+    image: mongo
