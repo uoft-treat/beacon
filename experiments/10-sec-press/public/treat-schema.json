@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Schema of the data this experiment submits to TREAT data service.",
+  "type": "object",
+  "properties": {
+    "session": {
+      "description": "The session token for the experiment.",
+      "type": "string"
+    },
+    "pressTime": {
+      "description": "Time that user pressed for the experiment.",
+      "type": "number"
+    }
+  },
+  "required": [
+    "session",
+    "pressTime"
+  ]
+}

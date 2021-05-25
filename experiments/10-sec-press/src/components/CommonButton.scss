@@ -1,0 +1,26 @@
+.btn {
+  border-radius: 4px;
+  background-color: #ffffff;
+  padding: 15px 25px 15px 25px;
+  color: #3e260c;
+  box-shadow: rgba(0,0,0,0.1) 5px 5px 10px;
+  border: none;
+  transition: all ease 0.3s;
+  position: relative;
+  left: 0;
+  top: 0;
+  outline: none;
+  font-size: 20px;
+  &:hover {
+    transition: all ease 0.3s;
+    box-shadow: rgba(0,0,0,0.1) 2px 2px 5px;
+    left: 2px;
+    top: 2px;
+  }
+  &:active {
+    transition: all ease 0.3s;
+    box-shadow: none;
+    left: 5px;
+    top: 5px;
+  }
+}

@@ -1,0 +1,15 @@
+.main{
+  text-align: center;
+  font-size: 40px;
+}
+
+.section{
+  margin: 50px; 
+  font-size: 40px;
+}
+
+.button {
+  margin: 5vw;
+  Width: 380px;
+  Height: 180px;
+}

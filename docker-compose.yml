@@ -97,5 +97,29 @@ services:
             - PORT=3058
             - MONGODB_URL=mongodb://db:27017/widget-registry
         command: ./start.sh
+    data_dashboard:
+        build: ./web/data-dashboard
+        ports:
+            - "3059:3059"
+        volumes:
+            - ./web/data-dashboard:/app
+        environment:
+            - PORT=3059
+            - IA_ROOT=https://ia.junzheng.dev
+            - IA_APP_ID=60acacbd4da936ad0824f1bf
+            - IA_PUB_KEY=0a70f63f-2d5b-44f4-8090-e8c8da9ed9d3
+            - IA_SEC_KEY=ca688f86-f67b-4451-8f91-42154de73cb2
+            - MONGODB_URL=mongodb://db:27017/data-dashboard
+        command: ./start.sh
+    graphql_api:
+        build: ./services/graphql-api
+        ports:
+            - "3060:3060"
+        volumes:
+            - ./services/graphql-api:/app
+        environment:
+            - PORT=3060
+            - MONGODB_URL=mongodb://db:27017/graphql-api
+        command: ./start.sh
     db:
         image: mongo

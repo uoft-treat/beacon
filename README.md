@@ -4,3 +4,11 @@
 </p>
 
 --------------
+
+Service registry names:
+
+widget-registry-service
+survey-questions-service
+experiment-template-service
+experiment-registry-service
+authentication-service
