@@ -4,164 +4,164 @@ services:
         build: ./services/csv-generation
         image: treat/csv-generation
         ports:
-            - "3050:3050"
+            - "${CSV_GENERATION_SERVICE_PORT}:${CSV_GENERATION_SERVICE_PORT}"
         volumes:
             - ./services/csv-generation:/app
         environment:
-            - PORT=3050
-            - MONGODB_URL=mongodb://db:27017/csv-generation
+            - PORT=${CSV_GENERATION_SERVICE_PORT}
+            - MONGODB_URL=${CSV_GENERATION_SERVICE_MONGODB_URL}
         command: ./start.sh
     data_collection:
         build: ./services/data-collection
         image: treat/data-collection
         ports:
-            - "3051:3051"
+            - "${DATA_COLLECTION_SERVICE_PORT}:${DATA_COLLECTION_SERVICE_PORT}"
         volumes:
             - ./services/data-collection:/app
         environment:
-            - PORT=3051
-            - MONGODB_URL=mongodb://db:27017/data-collection
+            - PORT=${DATA_COLLECTION_SERVICE_PORT}
+            - MONGODB_URL=${DATA_COLLECTION_SERVICE_MONGODB_URL}
         command: ./start.sh
     discovery:
         build: ./services/discovery
         image: treat/discovery
         ports:
-            - "3052:3052"
+            - "${DISCOVERY_SERVICE_PORT}:${DISCOVERY_SERVICE_PORT}"
         volumes:
             - ./services/discovery:/app
         environment:
-            - PORT=3052
-            - MONGODB_URL=mongodb://db:27017/discovery
+            - PORT=${DISCOVERY_SERVICE_PORT}
+            - MONGODB_URL=${DISCOVERY_SERVICE_MONGODB_URL}
         command: ./start.sh
     experiment_registry:
         build: ./services/experiment-registry
         image: treat/experiment-registry
         ports:
-            - "3053:3053"
+            - "${EXPERIMENT_REGISTRY_SERVICE_PORT}:${EXPERIMENT_REGISTRY_SERVICE_PORT}"
         volumes:
             - ./services/experiment-registry:/app
         environment:
-            - PORT=3053
-            - MONGODB_URL=mongodb://db:27017/experiment-registry
+            - PORT=${EXPERIMENT_REGISTRY_SERVICE_PORT}
+            - MONGODB_URL=${EXPERIMENT_REGISTRY_SERVICE_MONGODB_URL}
         command: ./start.sh
     experiment_session:
         build: ./services/experiment-session
         ports:
-            - "3054:3054"
+            - "${EXPERIMENT_SESSION_SERVICE_PORT}:${EXPERIMENT_SESSION_SERVICE_PORT}"
         volumes:
             - ./services/experiment-session:/app
         environment:
-            - PORT=3054
-            - MONGODB_URL=mongodb://db:27017/experiment-session
-            - DISCOVERY_SERVICE_URL=http://discovery:3052
+            - PORT=${EXPERIMENT_SESSION_SERVICE_PORT}
+            - MONGODB_URL=${EXPERIMENT_SESSION_SERVICE_MONGODB_URL}
+            - DISCOVERY_SERVICE_URL=http://discovery:${DISCOVERY_SERVICE_PORT}
         command: ./start.sh
     experiment_template:
         build: ./services/experiment-template
         ports:
-            - "3055:3055"
+            - "${EXPERIMENT_TEMPLATE_SERVICE_PORT}:${EXPERIMENT_TEMPLATE_SERVICE_PORT}"
         volumes:
             - ./services/experiment-template:/app
         environment:
-            - PORT=3055
-            - MONGODB_URL=mongodb://db:27017/experiment-template
-            - DISCOVERY_SERVICE_URL=http://discovery:3052
+            - PORT=${EXPERIMENT_TEMPLATE_SERVICE_PORT}
+            - MONGODB_URL=${EXPERIMENT_TEMPLATE_SERVICE_MONGODB_URL}
+            - DISCOVERY_SERVICE_URL=http://discovery:${DISCOVERY_SERVICE_PORT}
         command: ./start.sh
     survey_questions:
         build: ./services/survey-questions
         ports:
-            - "3056:3056"
+            - "${SURVEY_QUESTIONS_SERVICE_PORT}:${SURVEY_QUESTIONS_SERVICE_PORT}"
         volumes:
             - ./services/survey-questions:/app
         environment:
-            - PORT=3056
-            - MONGODB_URL=mongodb://db:27017/survey-questions
+            - PORT=${SURVEY_QUESTIONS_SERVICE_PORT}
+            - MONGODB_URL=${SURVEY_QUESTIONS_SERVICE_MONGODB_URL}
         command: ./start.sh
     survey_template:
         build: ./services/survey-template
         ports:
-            - "3057:3057"
+            - "${SURVEY_TEMPLATE_SERVICE_PORT}:${SURVEY_TEMPLATE_SERVICE_PORT}"
         volumes:
             - ./services/survey-template:/app
         environment:
-            - PORT=3057
-            - MONGODB_URL=mongodb://db:27017/survey-template
-            - DISCOVERY_SERVICE_URL=http://discovery:3052
+            - PORT=${SURVEY_TEMPLATE_SERVICE_PORT}
+            - MONGODB_URL=${SURVEY_TEMPLATE_SERVICE_MONGODB_URL}
+            - DISCOVERY_SERVICE_URL=http://discovery:${DISCOVERY_SERVICE_PORT}
         command: ./start.sh
     widget_registry:
         build: ./services/widget-registry
         ports:
-            - "3058:3058"
+            - "${WIDGET_REGISTRY_SERVICE_PORT}:${WIDGET_REGISTRY_SERVICE_PORT}"
         volumes:
             - ./services/widget-registry:/app
         environment:
-            - PORT=3058
-            - MONGODB_URL=mongodb://db:27017/widget-registry
+            - PORT=${WIDGET_REGISTRY_SERVICE_PORT}
+            - MONGODB_URL=${WIDGET_REGISTRY_SERVICE_MONGODB_URL}
         command: ./start.sh
     data_dashboard:
         build: ./web/data-dashboard
         ports:
-            - "3059:3059"
+            - "${DATA_DASHBOARD_PORT}:${DATA_DASHBOARD_PORT}"
         volumes:
             - ./web/data-dashboard:/app
         environment:
-            - PORT=3059
-            - IA_ROOT=https://ia.junzheng.dev
-            - IA_APP_ID=60acacbd4da936ad0824f1bf
-            - IA_PUB_KEY=0a70f63f-2d5b-44f4-8090-e8c8da9ed9d3
-            - IA_SEC_KEY=ca688f86-f67b-4451-8f91-42154de73cb2
-            - MONGODB_URL=mongodb://db:27017/data-dashboard
+            - PORT=${DATA_DASHBOARD_PORT}
+            - IA_ROOT=${DATA_DASHBOARD_IA_ROOT}
+            - IA_APP_ID=${DATA_DASHBOARD_IA_APP_ID}
+            - IA_PUB_KEY=${DATA_DASHBOARD_IA_PUB_KEY}
+            - IA_SEC_KEY=${DATA_DASHBOARD_IA_SEC_KEY}
+            - MONGODB_URL=${DATA_DASHBOARD_MONGODB_URL}
         command: ./start.sh
     graphql_api:
         build: ./services/graphql-api
         ports:
-            - "3060:3060"
+            - "${GRAPHQL_API_PORT}:${GRAPHQL_API_PORT}"
         volumes:
             - ./services/graphql-api:/app
         environment:
-            - PORT=3060
-            - MONGODB_URL=mongodb://db:27017/graphql-api
+            - PORT=${GRAPHQL_API_PORT}
+            - MONGODB_URL=${GRAPHQL_API_MONGODB_URL}
         command: ./start.sh
     api_gateway:
         build: ./services/api-gateway
         ports:
-            - "3061:3061"
+            - "${API_GATEWAY_PORT}:${API_GATEWAY_PORT}"
         volumes:
             - ./services/api-gateway:/app
         environment:
-            - PORT=3061
-            - MONGODB_URL=mongodb://db:27017/api-gateway
-            - DISCOVERY_SERVICE_URL=http://discovery:3052
+            - PORT=${API_GATEWAY_PORT}
+            - MONGODB_URL=${API_GATEWAY_MONGODB_URL}
+            - DISCOVERY_SERVICE_URL=http://discovery:${DISCOVERY_SERVICE_PORT}
         command: ./start.sh
     admin_dashboard:
         build: ./web/admin-dashboard
         ports:
-            - "3062:3062"
+            - "${ADMIN_DASHBOARD_PORT}:${ADMIN_DASHBOARD_PORT}"
         volumes:
             - ./web/admin-dashboard:/app
         environment:
-            - PORT=3062
-            - API_ENDPOINT=http://graphql_api:3060/graphql
-            - APP_URL=localhost:3064
+            - PORT=${ADMIN_DASHBOARD_PORT}
+            - API_ENDPOINT=http://graphql_api:${GRAPHQL_API_PORT}/graphql
+            - APP_URL=${ADMIN_DASHBOARD_APP_URL}
         command: ./start.sh
     authentication:
         build: ./services/authentication
         ports:
-            - "3063:3063"
+            - "${AUTHENTICATION_SERVICE_PORT}:${AUTHENTICATION_SERVICE_PORT}"
         volumes:
             - ./services/authentication:/app
         environment:
-            - PORT=3063
-            - MONGODB_URL=mongodb://db:27017/authentication
+            - PORT=${AUTHENTICATION_SERVICE_PORT}
+            - MONGODB_URL=${AUTHENTICATION_SERVICE_MOGODB_URL}
         command: ./start.sh
     student_app:
         build: ./web/student-app
         ports:
-            - "3064:3064"
+            - "${STUDENT_APP_PORT}:${STUDENT_APP_PORT}"
         volumes:
             - ./web/student-app:/app
         environment:
-            - PORT=3064
-            - API_ENDPOINT=http://graphql_api:3060/graphql
+            - PORT=${STUDENT_APP_PORT}
+            - API_ENDPOINT=http://graphql_api:${GRAPHQL_API_PORT}/graphql
         command: ./start.sh
     db:
         image: mongo
