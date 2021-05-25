@@ -2,7 +2,7 @@ import {IDataSubmissionService} from "../IDataSubmissionService";
 import request                  from "graphql-request";
 import {TreatService}           from "./TreatService";
 
-const SUBMISSION_URL = "http://localhost:3060/graphql";
+const SUBMISSION_URL = process.env.REACT_APP_SUBMISSION_URL;
 
 let instance;
 
