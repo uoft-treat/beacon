@@ -1,0 +1,1 @@
+[ ] Auto redirect to login if not logged in

@@ -121,5 +121,39 @@ services:
             - PORT=3060
             - MONGODB_URL=mongodb://db:27017/graphql-api
         command: ./start.sh
+    api_gateway:
+        build: ./services/api-gateway
+        ports:
+            - "3061:3061"
+        volumes:
+            - ./services/api-gateway:/app
+        environment:
+            - PORT=3061
+            - MONGODB_URL=mongodb://db:27017/api-gateway
+            - DISCOVERY_SERVICE_URL=http://discovery:3052
+        command: ./start.sh
+    admin_dashboard:
+        build: ./web/admin-dashboard
+        ports:
+            - "3062:3062"
+        volumes:
+            - ./web/admin-dashboard:/app
+        environment:
+            - PORT=3062
+            - API_ENDPOINT=http://graphql_api:3060/graphql
+            - APP_URL=TEMP_APP_URL
+        command: ./start.sh
+    authentication:
+        build: ./services/authentication
+        ports:
+            - "3063:3063"
+        volumes:
+            - ./services/authentication:/app
+        environment:
+            - PORT=3063
+            - MONGODB_URL=mongodb://db:27017/authentication
+        command: ./start.sh
     db:
         image: mongo
+        volumes:
+            - ./data:/data/db

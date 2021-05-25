@@ -1,0 +1,46 @@
+<% include partials/header.ejs %>
+<% include partials/nav.ejs %>
+
+<div class="container pt-2">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data</li>
+        </ol>
+    </nav>
+
+    <h2>Experiment Data</h2>
+    <h3>Data for Session: <%= session._id %></h3>
+    <p>
+        Experiment: <%= session.experimentTemplate.name %>
+    </p>
+    <form method="post" action="export" target="_blank">
+        <input type="hidden" name="accessCode" value="<%= session.accessCode %>" />
+        <button class="btn btn-primary">Export CSV</button>
+    </form>
+    <hr/>
+    <% include partials/errorDisplay.ejs %>
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <% for(const heading of headings) { %>
+                <th scope="col"><%= heading %></th>
+            <% } %>
+            <th scope="col">time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(const row of session.data) { %>
+            <tr>
+                <% for(const heading of headings) { %>
+                    <td><%= JSON.parse(row.jsonData)[heading] %></td>
+                <% } %>
+                <td><%= new Date(parseInt(row.createdAt)).toISOString() %></td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
+
+<% include partials/footer.ejs %>
