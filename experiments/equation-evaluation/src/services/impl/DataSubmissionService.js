@@ -1,7 +1,7 @@
 import {IDataSubmissionService} from "../IDataSubmissionService";
 import axios from 'axios';
 
-const SUBMISSION_URL = "http://localhost:3059/api/data";
+const SUBMISSION_URL = process.env.REACT_APP_SUBMISSION_URL;
 
 let instance;
 
