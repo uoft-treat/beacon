@@ -6,7 +6,7 @@ services:
         ports:
             - "${CSV_GENERATION_SERVICE_PORT}:${CSV_GENERATION_SERVICE_PORT}"
         volumes:
-            - ./services/csv-generation:/app
+            - ./services/csv-generation:/app:z
         environment:
             - PORT=${CSV_GENERATION_SERVICE_PORT}
             - MONGODB_URL=${CSV_GENERATION_SERVICE_MONGODB_URL}
@@ -17,7 +17,7 @@ services:
         ports:
             - "${DATA_COLLECTION_SERVICE_PORT}:${DATA_COLLECTION_SERVICE_PORT}"
         volumes:
-            - ./services/data-collection:/app
+            - ./services/data-collection:/app:z
         environment:
             - PORT=${DATA_COLLECTION_SERVICE_PORT}
             - MONGODB_URL=${DATA_COLLECTION_SERVICE_MONGODB_URL}
@@ -28,7 +28,7 @@ services:
         ports:
             - "${DISCOVERY_SERVICE_PORT}:${DISCOVERY_SERVICE_PORT}"
         volumes:
-            - ./services/discovery:/app
+            - ./services/discovery:/app:z
         environment:
             - PORT=${DISCOVERY_SERVICE_PORT}
             - MONGODB_URL=${DISCOVERY_SERVICE_MONGODB_URL}
@@ -39,7 +39,7 @@ services:
         ports:
             - "${EXPERIMENT_REGISTRY_SERVICE_PORT}:${EXPERIMENT_REGISTRY_SERVICE_PORT}"
         volumes:
-            - ./services/experiment-registry:/app
+            - ./services/experiment-registry:/app:z
         environment:
             - PORT=${EXPERIMENT_REGISTRY_SERVICE_PORT}
             - MONGODB_URL=${EXPERIMENT_REGISTRY_SERVICE_MONGODB_URL}
@@ -49,7 +49,7 @@ services:
         ports:
             - "${EXPERIMENT_SESSION_SERVICE_PORT}:${EXPERIMENT_SESSION_SERVICE_PORT}"
         volumes:
-            - ./services/experiment-session:/app
+            - ./services/experiment-session:/app:z
         environment:
             - PORT=${EXPERIMENT_SESSION_SERVICE_PORT}
             - MONGODB_URL=${EXPERIMENT_SESSION_SERVICE_MONGODB_URL}
@@ -60,7 +60,7 @@ services:
         ports:
             - "${EXPERIMENT_TEMPLATE_SERVICE_PORT}:${EXPERIMENT_TEMPLATE_SERVICE_PORT}"
         volumes:
-            - ./services/experiment-template:/app
+            - ./services/experiment-template:/app:z
         environment:
             - PORT=${EXPERIMENT_TEMPLATE_SERVICE_PORT}
             - MONGODB_URL=${EXPERIMENT_TEMPLATE_SERVICE_MONGODB_URL}
@@ -71,7 +71,7 @@ services:
         ports:
             - "${SURVEY_QUESTIONS_SERVICE_PORT}:${SURVEY_QUESTIONS_SERVICE_PORT}"
         volumes:
-            - ./services/survey-questions:/app
+            - ./services/survey-questions:/app:z
         environment:
             - PORT=${SURVEY_QUESTIONS_SERVICE_PORT}
             - MONGODB_URL=${SURVEY_QUESTIONS_SERVICE_MONGODB_URL}
@@ -81,7 +81,7 @@ services:
         ports:
             - "${SURVEY_TEMPLATE_SERVICE_PORT}:${SURVEY_TEMPLATE_SERVICE_PORT}"
         volumes:
-            - ./services/survey-template:/app
+            - ./services/survey-template:/app:z
         environment:
             - PORT=${SURVEY_TEMPLATE_SERVICE_PORT}
             - MONGODB_URL=${SURVEY_TEMPLATE_SERVICE_MONGODB_URL}
@@ -92,7 +92,7 @@ services:
         ports:
             - "${WIDGET_REGISTRY_SERVICE_PORT}:${WIDGET_REGISTRY_SERVICE_PORT}"
         volumes:
-            - ./services/widget-registry:/app
+            - ./services/widget-registry:/app:z
         environment:
             - PORT=${WIDGET_REGISTRY_SERVICE_PORT}
             - MONGODB_URL=${WIDGET_REGISTRY_SERVICE_MONGODB_URL}
@@ -102,7 +102,7 @@ services:
         ports:
             - "${DATA_DASHBOARD_PORT}:${DATA_DASHBOARD_PORT}"
         volumes:
-            - ./web/data-dashboard:/app
+            - ./web/data-dashboard:/app:z
         environment:
             - PORT=${DATA_DASHBOARD_PORT}
             - IA_ROOT=${DATA_DASHBOARD_IA_ROOT}
@@ -116,7 +116,7 @@ services:
         ports:
             - "${GRAPHQL_API_PORT}:${GRAPHQL_API_PORT}"
         volumes:
-            - ./services/graphql-api:/app
+            - ./services/graphql-api:/app:z
         environment:
             - PORT=${GRAPHQL_API_PORT}
             - MONGODB_URL=${GRAPHQL_API_MONGODB_URL}
@@ -126,7 +126,7 @@ services:
         ports:
             - "${API_GATEWAY_PORT}:${API_GATEWAY_PORT}"
         volumes:
-            - ./services/api-gateway:/app
+            - ./services/api-gateway:/app:z
         environment:
             - PORT=${API_GATEWAY_PORT}
             - MONGODB_URL=${API_GATEWAY_MONGODB_URL}
@@ -137,7 +137,7 @@ services:
         ports:
             - "${ADMIN_DASHBOARD_PORT}:${ADMIN_DASHBOARD_PORT}"
         volumes:
-            - ./web/admin-dashboard:/app
+            - ./web/admin-dashboard:/app:z
         environment:
             - PORT=${ADMIN_DASHBOARD_PORT}
             - API_ENDPOINT=http://graphql_api:${GRAPHQL_API_PORT}/graphql
@@ -148,7 +148,7 @@ services:
         ports:
             - "${AUTHENTICATION_SERVICE_PORT}:${AUTHENTICATION_SERVICE_PORT}"
         volumes:
-            - ./services/authentication:/app
+            - ./services/authentication:/app:z
         environment:
             - PORT=${AUTHENTICATION_SERVICE_PORT}
             - MONGODB_URL=${AUTHENTICATION_SERVICE_MOGODB_URL}
@@ -158,7 +158,7 @@ services:
         ports:
             - "${STUDENT_APP_PORT}:${STUDENT_APP_PORT}"
         volumes:
-            - ./web/student-app:/app
+            - ./web/student-app:/app:z
         environment:
             - PORT=${STUDENT_APP_PORT}
             - API_ENDPOINT=http://graphql_api:${GRAPHQL_API_PORT}/graphql
