@@ -14,6 +14,7 @@ dotenv.config();
 
 const app = express();
 
+const BASE_PATH = process.env.BASE_PATH;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
@@ -41,17 +42,17 @@ app.use(async (req, res, next) => {
     }
 });
 
-app.get('/', (req, res) => res.redirect('/login'));
+app.get(`${BASE_PATH}/`, (req, res) => res.redirect(`${BASE_PATH}/login`));
 
-app.get('/login', (req, res) => {
+app.get(`${BASE_PATH}/login`, (req, res) => {
     if (req.user) {
-        return res.redirect('/dashboard');
+        return res.redirect(`${BASE_PATH}/dashboard`);
     } else {
         res.render('login');
     }
 });
 
-app.post('/login', async (req, res) => {
+app.post(`${BASE_PATH}/login`, async (req, res) => {
     let token;
     try {
         token = await AuthenticationService.createUserToken(req.body.username, req.body.password);
@@ -60,21 +61,21 @@ app.post('/login', async (req, res) => {
         req.flash('error', "Invalid username or password.");
     }
     req.session['token'] = token;
-    return res.redirect('/login');
+    return res.redirect(`${BASE_PATH}/login`);
 });
 
-app.post('/logout', (req, res) => {
+app.post(`${BASE_PATH}/logout`, (req, res) => {
     req.user = undefined;
-    res.redirect('/login');
+    res.redirect(`${BASE_PATH}/login`);
 });
 
-app.get('/dashboard', async (req, res) => {
+app.get(`${BASE_PATH}/dashboard`, async (req, res) => {
     const templates = await ExperimentTemplateService.getAllTemplates();
     const sessions  = await ExperimentSessionService.getAllSessions();
     res.render('dashboard', {templates, sessions});
 });
 
-app.post('/session', async (req, res) => {
+app.post(`${BASE_PATH}/session`, async (req, res) => {
     const session = await ExperimentSessionService.createNewSession(req.body.templateId);
     res.render('session', {session});
 });
@@ -93,7 +94,7 @@ function getSessionHeadings(session) {
     return headings;
 }
 
-app.post('/export', async (req, res) => {
+app.post(`${BASE_PATH}/export`, async (req, res) => {
 
     const session = await ExperimentSessionService.getSessionByAccessCode(req.param('accessCode'));
     const fields  = [...getSessionHeadings(session), 'time'];
@@ -117,7 +118,7 @@ app.post('/export', async (req, res) => {
     res.status(200).send(csv);
 });
 
-app.get('/data', async (req, res) => {
+app.get(`${BASE_PATH}/data`, async (req, res) => {
     const session  = await ExperimentSessionService.getSessionByAccessCode(req.param('accessCode'));
     // Get all headings
     const headings = getSessionHeadings(session);
