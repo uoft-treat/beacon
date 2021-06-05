@@ -18,7 +18,7 @@
 <div class="container app">
     <h2 class="title">Visit <b><%= process.env.APP_URL %></b> and type the following code:</h2>
     <h1 class="code-display"><code><%= session.accessCode.substring(0, 3) %> <%= session.accessCode.substring(3, 6) %></code></h1>
-    <form method="get" action="/data">
+    <form method="get" action="<%= process.env.BASE_PATH + '/data' %>">
         <input type="hidden" value="<%= session.accessCode %>" class="form-control" name="accessCode" />
         <button class="btn btn-primary">Stop & View Results</button>
     </form>

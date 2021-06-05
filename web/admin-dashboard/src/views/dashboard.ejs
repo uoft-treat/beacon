@@ -17,7 +17,7 @@
             <hr class="mt-2"/>
             <h4><%= template.name %></h4>
             <p><%= template.description %></p>
-            <form method="post" action="<%= process.env.BASE_URL + '/session' %>" target="_blank">
+            <form method="post" action="<%= process.env.BASE_PATH + '/session' %>" target="_blank">
                 <input type="hidden" value="<%= template._id %>" name="templateId">
                 <button class="btn btn-secondary">Use This Template</button>
             </form>
@@ -38,7 +38,7 @@
                     <td><%= session.experimentTemplate.name %></td>
                     <td><%= session.accessCode %></td>
                     <td>
-                        <form action="<%= process.env.BASE_URL + '/data' %>">
+                        <form action="<%= process.env.BASE_PATH + '/data' %>">
                             <input type="hidden" value="<%= session.accessCode %>" name="accessCode">
                             <button class="btn btn-link">View Result</button>
                         </form>
