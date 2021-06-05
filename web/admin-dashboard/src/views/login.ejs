@@ -3,7 +3,7 @@
     <div class="container pt-2">
         <h2>Login</h2>
         <% include partials/errorDisplay.ejs %>
-        <form method="post" action="/login">
+        <form method="post" action="<%= process.env.BASE_URL + '/login' %>">
             <input type="text" name="username" placeholder="Username" class="form-control mt-2" />
             <input type="password" name="password" placeholder="Password" class="form-control mt-2" />
             <button class="btn btn-primary mt-2">Login</button>

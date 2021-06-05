@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand" href="#">TREAT Dashboard</a>
         <div class="mr-auto"></div>
-        <form method="post" action="/logout">
+        <form method="post" action="<%= process.env.BASE_URL + '/logout' %>">
             <button class="btn btn-link" type="submit">Logout</button>
         </form>
     </div>
