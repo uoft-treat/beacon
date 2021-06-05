@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', (req, res) => res.render('entry'));
-app.post('/join', async (req, res) => {
+app.post('//join', async (req, res) => {
     if (req.body.accessCode.length !== 6) {
         req.flash('error', 'Access code must be 6 digits.');
         res.redirect(`${BASE_PATH}/`);
