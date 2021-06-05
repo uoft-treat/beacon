@@ -142,6 +142,7 @@ services:
             - PORT=${ADMIN_DASHBOARD_PORT}
             - API_ENDPOINT=http://graphql_api:${GRAPHQL_API_PORT}/graphql
             - APP_URL=${ADMIN_DASHBOARD_APP_URL}
+            - BASE_PATH=${ADMIN_DASHBOARD_BASE_PATH}
         command: ./start.sh
     authentication:
         build: ./services/authentication
