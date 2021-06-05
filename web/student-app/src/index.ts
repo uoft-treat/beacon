@@ -11,6 +11,8 @@ dotenv.config();
 
 const app = express();
 
+const BASE_PATH = process.env.BASE_PATH;
+
 app.use(cookieParser('secret'));
 app.use(session({cookie: {maxAge: 60000}}));
 app.use(flash());
@@ -28,7 +30,7 @@ app.get('/', (req, res) => res.render('entry'));
 app.post('/join', async (req, res) => {
     if (req.body.accessCode.length !== 6) {
         req.flash('error', 'Access code must be 6 digits.');
-        res.redirect('/');
+        res.redirect(`${BASE_PATH}/`);
     } else {
         let result;
         try {
@@ -45,7 +47,7 @@ app.post('/join', async (req, res) => {
             `, {accessCode: req.body.accessCode});
         } catch (e) {
             req.flash('error', 'Cannot find the session.');
-            res.redirect('/');
+            res.redirect(`${BASE_PATH}/`);
         }
         res.redirect(result.experimentSession.experimentTemplate.link + "?sessionId=" + result.experimentSession._id);
     }

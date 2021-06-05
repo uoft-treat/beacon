@@ -9,7 +9,7 @@
 
 <div class="container app">
     <h2 class="pt-4">Join an Experiment</h2>
-    <form action="/join" method="post">
+    <form action="<%= process.env.BASE_PATH + '/join' %>" method="post">
         <% if(messages['error']) { %>
             <div class="alert alert-danger" role="alert">
                 <%= messages['error'] %>
